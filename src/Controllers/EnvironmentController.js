@@ -17,10 +17,10 @@ class EnvironmentController extends CanvasController{
     }
 
     defineZoomControls() {
-          var scale = 1;
-          var zoom_speed = 0.5;
-          const el = document.querySelector('#env-canvas');
-          el.onwheel = function zoom(event) {
+        let scale = 1;
+        var zoom_speed = 0.1;
+        const el = document.querySelector('#env-canvas');
+        el.onwheel = function zoom(event) {
             event.preventDefault();
 
             var sign = -Math.sign(event.deltaY);
@@ -44,12 +44,12 @@ class EnvironmentController extends CanvasController{
                 $('#env-canvas').css('top', (cur_top+diff_y)+'px');
                 $('#env-canvas').css('left', (cur_left+diff_x)+'px');
             }
-          
+        
             // Apply scale transform
             el.style.transform = `scale(${scale})`;
             this.scale = scale;
 
-          }.bind(this);
+        }.bind(this);
     }
 
     resetView() {
