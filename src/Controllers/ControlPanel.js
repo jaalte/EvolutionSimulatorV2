@@ -41,8 +41,16 @@ class ControlPanel {
                 this.stats_panel.startAutoRender();
             }
         });
+
+        // Hotkeys
         const V_KEY = 118;
+        const SPACE_KEY = 32;
+
+
         $('body').keypress( (e) => {
+
+            console.log("Keypress: " + e.which)
+
             if (e.which === V_KEY) {
                 if (this.no_hud) {
                     let control_panel_display = this.control_panel_active ? 'grid' : 'none';
@@ -59,6 +67,18 @@ class ControlPanel {
                 }
                 this.no_hud = !this.no_hud;
             }
+            else if (e.which == SPACE_KEY) {
+                $('.pause-button').find("i").toggleClass("fa fa-pause");
+                $('.pause-button').find("i").toggleClass("fa fa-play");
+                this.paused = !this.paused;
+                if (this.engine.running) {
+                    this.engine.stop();
+                }
+                else if (!this.engine.running){
+                    this.engine.start(this.fps);
+                }
+            }
+
         });
         // var self = this;
         // $('#minimize').click ( function() {
