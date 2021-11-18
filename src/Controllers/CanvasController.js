@@ -10,6 +10,7 @@ class CanvasController{
         this.mouse_r;
         this.left_click = false;
         this.right_click = false;
+        this.middle_click = false;
         this.cur_cell = null;
         this.cur_org = null;
         this.highlight_org = true;
@@ -32,14 +33,16 @@ class CanvasController{
             this.mouseUp();
             this.left_click=false;
             this.right_click=false;
+            this.middle_click=false;
         }.bind(this));
 
         this.canvas.addEventListener('mousedown', function(evt) {
             evt.preventDefault();
             this.updateMouseLocation(evt.offsetX, evt.offsetY)
-            if (evt.button == 0) {
+            if (evt.button == 0)
                 this.left_click = true;
-            }
+            if (evt.button == 1) 
+                this.middle_click = true;
             if (evt.button == 2) 
                 this.right_click = true;
             this.mouseDown();
@@ -52,6 +55,7 @@ class CanvasController{
         this.canvas.addEventListener('mouseleave', function(){
             this.right_click = false;
             this.left_click = false;
+            this.middle_click = false;
             this.env.renderer.clearAllHighlights(true);
         }.bind(this));
 

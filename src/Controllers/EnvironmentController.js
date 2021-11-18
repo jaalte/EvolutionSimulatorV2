@@ -84,7 +84,8 @@ class EnvironmentController extends CanvasController{
         var mode = this.mode;
         var right_click = this.right_click;
         var left_click = this.left_click;
-        if (mode != Modes.None && (right_click || left_click)) {
+        var middle_click = this.middle_click;
+        if (mode != Modes.None && (right_click || left_click || middle_click)) {
             var cell = this.cur_cell;
             if (cell == null){
                 return;
@@ -97,58 +98,82 @@ class EnvironmentController extends CanvasController{
                     else if (right_click){
                         this.dropCellType(cell.col, cell.row, CellStates.empty, false);
                     }
+                    else if (middle_click){
+                        this.dragEnvironment()
+                    }
                     break;
                 case Modes.WallDrop:
-                        if (left_click){
-                            this.dropCellType(cell.col, cell.row, CellStates.wall, true);
+                    if (left_click){
+                        this.dropCellType(cell.col, cell.row, CellStates.wall, true);
 
-                        }
-                        else if (right_click){
-                            this.dropCellType(cell.col, cell.row, CellStates.empty, false);
-                        }
-                        break;
+                    }
+                    else if (right_click){
+                        this.dropCellType(cell.col, cell.row, CellStates.empty, false);
+                    }
+                    else if (middle_click){
+                        this.dragEnvironment()
+                    }
+                    break;
                 case Modes.ClickKill:
-                    this.killNearOrganisms();
+
+                    if (left_click){
+                        this.killNearOrganisms();
+                    }
+                    else if (middle_click){
+                        this.dragEnvironment()
+                    }
                     break;
 
                 case Modes.Select:
-                    if (this.cur_org == null) {
-                        this.cur_org = this.findNearOrganism();
+                    if (left_click){
+                        if (this.cur_org == null) {
+                            this.cur_org = this.findNearOrganism();
+                        }
+                        if (this.cur_org != null){
+                            this.control_panel.setEditorOrganism(this.cur_org);
+                        }
                     }
-                    if (this.cur_org != null){
-                        this.control_panel.setEditorOrganism(this.cur_org);
+                    else if (middle_click){
+                        this.dragEnvironment()
                     }
                     break;
-
                 case Modes.Clone:
-                    if (this.org_to_clone != null){
-                        var new_org = new Organism(this.mouse_c, this.mouse_r, this.env, this.org_to_clone);
-                        if (this.add_new_species){
-                            FossilRecord.addSpeciesObj(new_org.species);
-                            new_org.species.start_tick = this.env.total_ticks;
-                            this.add_new_species = false;
-                            new_org.species.population = 0;
+                    if (left_click){
+                        if (this.org_to_clone != null){
+                            var new_org = new Organism(this.mouse_c, this.mouse_r, this.env, this.org_to_clone);
+                            if (this.add_new_species){
+                                FossilRecord.addSpeciesObj(new_org.species);
+                                new_org.species.start_tick = this.env.total_ticks;
+                                this.add_new_species = false;
+                                new_org.species.population = 0;
+                            }
+                            else if (this.org_to_clone.species.extinct){
+                                FossilRecord.resurrect(this.org_to_clone.species);
+                            }
+    
+                            if (new_org.isClear(this.mouse_c, this.mouse_r)){
+                                this.env.addOrganism(new_org);
+                                new_org.species.addPop();
+                            }
                         }
-                        else if (this.org_to_clone.species.extinct){
-                            FossilRecord.resurrect(this.org_to_clone.species);
-                        }
-
-                        if (new_org.isClear(this.mouse_c, this.mouse_r)){
-                            this.env.addOrganism(new_org);
-                            new_org.species.addPop();
-                        }
+                    }
+                    else if (middle_click){
+                        this.dragEnvironment()
                     }
                     break;
                 case Modes.Drag:
-                    var cur_top = parseInt($('#env-canvas').css('top'), 10);
-                    var cur_left = parseInt($('#env-canvas').css('left'), 10);
-                    var new_top = cur_top + ((this.mouse_y - this.start_y)*this.scale);
-                    var new_left = cur_left + ((this.mouse_x - this.start_x)*this.scale);
-                    $('#env-canvas').css('top', new_top+'px');
-                    $('#env-canvas').css('left', new_left+'px');
-                    break;
+                    this.dragEnvironment()
             }
         }
+    }
+
+    dragEnvironment() {
+        var cur_top = parseInt($('#env-canvas').css('top'), 10);
+        var cur_left = parseInt($('#env-canvas').css('left'), 10);
+        var new_top = cur_top + ((this.mouse_y - this.start_y)*this.scale);
+        var new_left = cur_left + ((this.mouse_x - this.start_x)*this.scale);
+        $('#env-canvas').css('top', new_top+'px');
+        $('#env-canvas').css('left', new_left+'px');
     }
 
     dropCellType(col, row, state, killBlocking=false) {
