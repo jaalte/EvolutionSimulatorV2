@@ -56,7 +56,9 @@ class Engine {
 
     environmentUpdate() {
         this.env.update(this.delta_time);
-        this.actual_fps = 1/this.delta_time*1000;
+        if(this.delta_time > 0) {
+            this.actual_fps = 1/this.delta_time*1000;
+        }
         if(this.render_loop == null){
             this.necessaryUpdate();
         }
