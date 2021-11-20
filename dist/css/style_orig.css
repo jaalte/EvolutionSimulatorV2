@@ -1,0 +1,258 @@
+body{
+    background: #3a4b68;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;   
+}
+
+#env {
+    position: fixed;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    transform: scale(1);
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-crisp-edges;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+#env-canvas {
+    top: 0;
+    left: 0;
+    position: relative;
+}
+
+.control-panel {
+    height: 300px;
+    width: 100%;
+    bottom: 0;
+    position: fixed;
+    background-color: #3a4b68;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* opacity: 0.8; */
+}
+
+/* .control-panel:hover {
+    opacity: 1;
+} */
+
+.control-set {
+    margin: 5px;
+    padding: 5px;
+    border: 10px;
+    border-radius: 15px;
+    background-color: #e1e3ec;
+    grid-row: 1;
+}
+
+img {
+    image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-crisp-edges;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+    width: 60%;
+    border-radius: 10px;
+}
+
+button {
+    border: none;
+    color: black;
+    background-color: #9099c2;
+    border-radius: 8px;
+    padding: 5px 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    min-width: 30px;
+}
+button:hover{
+    background-color: #81d2c7;
+}
+
+.icon-links {
+    font-size: 35px;
+    position: fixed;
+    bottom: 10px;
+    right: 20px;
+}
+
+#speed-controller {
+    grid-column: 1;
+}
+
+.vertical-buttons {
+    float:right;
+    display: grid;
+    grid-template-rows: 2;
+    grid-template-columns: 1;
+}
+.editor-buttons {
+    display: grid;
+    grid-template-rows: 3;
+    grid-template-columns: 1;
+    height: fit-content;
+}
+
+.col-row-input {
+    display: none;
+}
+
+#tab-container {
+    grid-column: 2 / 4;
+}
+
+.tabnav {
+    overflow: hidden;
+    background-color: #416788;
+    border-radius: 15px;
+}
+.tabnav p {
+    float: left;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 18px;
+    user-select: none;
+}
+.tabnav p:hover {
+    background-color: #81d2c7;
+    color: black;
+}
+
+.tab {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1;
+    display: none;
+    padding: 10px
+}
+
+.tab#about {
+    display: grid;
+}
+
+.left-half {
+    grid-column: 1;
+}
+
+.right-half {
+    grid-column: 2;
+}
+
+.global-mutation-in {
+    display: none;
+}
+
+
+#editor-panel{
+    display: flex;
+}
+.edit-mode-btn {
+    width: 30px;
+    height: 30px;
+    margin-top: 5px;
+}
+.edit-mode-btn:hover{
+    background-color: #81d2c7;
+}
+.edit-mode-btn#drag-view {
+    background-color: #81d2c7;
+}
+#clear-walls {
+    margin-top: 5px;
+}
+#organism-options {
+    display: none;
+}
+#drop-org {
+    bottom: 0;
+}
+#editor-env {
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-crisp-edges;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    height: 195px;
+    width: 195px; 
+}
+#cell-selections {
+    display: none;
+    grid-template-columns: 2;
+    height: fit-content;
+    padding: 0;
+    margin: 0;
+}
+#cell-legend {
+    display: flex;
+    width: max-content;
+    padding: 10px;
+    align-items: center;
+    background-color: #121D29;
+    border-radius: 10px;
+}
+.cell-type {
+    width: 30px;
+    height: 30px;
+    border: solid black;
+    border-width: 2px;
+    margin: 1px;
+}
+.cell-legend-type {
+    width: 50px;
+    height: 50px;
+    margin: 1px;
+}
+.cell-legend-hover {
+    border-color: black;
+    border: 5px;
+}
+#editor-mode-cont{
+    padding-top: 20px;
+}
+
+.challenge-btn {
+    height: 50px;
+    margin: 5px;
+}
+
+#chartContainer {
+    height: 200px; 
+    width: 100%;
+}
+
+
+.hot-controls {
+    position: fixed;
+    bottom: 10px;
+    padding-left: 10px;
+    display: none;
+}
+
+#headless-notification {
+    display: none;
+    position: fixed;
+    color: white;
+    font-size: 200px;
+    left: 0;
+    top: 0;
+    padding-left: 10px;
+}
+
+#minimize {
+    margin: 10px;
+    float: right;
+}
+#maximize-hot-control {
+    right: 10px;
+}
