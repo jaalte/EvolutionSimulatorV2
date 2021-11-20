@@ -80,6 +80,33 @@ class ControlPanel {
             }
 
         });
+
+        $('body').keydown( (e) => {
+
+            console.log("Keydown: " + e.which)
+
+            if (e.which == W_KEY || e.which == UP_KEY) {
+                var cur_top = parseInt($('#env-canvas').css('top'));
+                var new_top = cur_top + KEY_SCROLL_AMOUNT*scaleFactor;
+                $('#env-canvas').css('top', new_top+'px');
+            }
+            else if (e.which == S_KEY || e.which == DOWN_KEY) {
+                var cur_top = parseInt($('#env-canvas').css('top'));
+                var new_top = cur_top - KEY_SCROLL_AMOUNT*scaleFactor;
+                $('#env-canvas').css('top', new_top+'px');
+            }
+            else if (e.which == A_KEY || e.which == LEFT_KEY) {
+                var cur_left = parseInt($('#env-canvas').css('left'));
+                var new_left = cur_left + KEY_SCROLL_AMOUNT*scaleFactor;
+                $('#env-canvas').css('left', new_left+'px');
+            }
+            else if (e.which == D_KEY || e.which == RIGHT_KEY) {
+                var cur_left = parseInt($('#env-canvas').css('left'));
+                var new_left = cur_left - KEY_SCROLL_AMOUNT*scaleFactor;
+                $('#env-canvas').css('left', new_left+'px');
+            } 
+        });
+
         // var self = this;
         // $('#minimize').click ( function() {
         //     $('.control-panel').css('display', 'none');
