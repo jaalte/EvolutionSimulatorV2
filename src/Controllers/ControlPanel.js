@@ -41,8 +41,29 @@ class ControlPanel {
                 this.stats_panel.startAutoRender();
             }
         });
+
+        // Jaalte hotkeys
+
         const V_KEY = 118;
+        const SPACE_KEY = 32;
+        const SHIFT_KEY = 16;
+
+        const W_KEY = 119
+        const A_KEY = 97
+        const S_KEY = 115
+        const D_KEY = 100
+
+        // Arrow keys are not detected
+        const LEFT_KEY = 37
+        const UP_KEY = 38
+        const RIGHT_KEY = 39
+        const DOWN_KEY = 40
+
+        const KEY_SCROLL_AMOUNT = 10
+        let scaleFactor = 1
+
         $('body').keypress( (e) => {
+
             if (e.which === V_KEY) {
                 if (this.no_hud) {
                     let control_panel_display = this.control_panel_active ? 'grid' : 'none';
@@ -59,7 +80,81 @@ class ControlPanel {
                 }
                 this.no_hud = !this.no_hud;
             }
+            else if (e.which == SPACE_KEY) {
+                $('.pause-button').find("i").toggleClass("fa fa-pause");
+                $('.pause-button').find("i").toggleClass("fa fa-play");
+                this.paused = !this.paused;
+                if (this.engine.running) {
+                    this.engine.stop();
+                }
+                else if (!this.engine.running){
+                    this.engine.start(this.fps);
+                }
+            }
+            else if (e.which == SHIFT_KEY) {
+                self.setMode(Modes.Drag);
+            }
+
+
+
+            /** 
+             *                 case "food-drop":
+                    self.setMode(Modes.FoodDrop);
+                    break;
+                case "wall-drop":
+                    self.setMode(Modes.WallDrop);
+                    break;
+                case "click-kill":
+                    self.setMode(Modes.ClickKill);
+                    break;
+                case "select":
+                    self.setMode(Modes.Select);
+                    break;
+                case "edit":
+                    self.setMode(Modes.Edit);
+                    self.editor_controller.setEditorPanel();
+                    break;
+                case "drop-org":
+                    self.setMode(Modes.Clone);
+                    self.env_controller.org_to_clone = self.engine.organism_editor.getCopyOfOrg();
+                    self.env_controller.add_new_species = self.editor_controller.new_species;
+                    self.editor_controller.new_species = false;
+                    // console.log(self.env_controller.add_new_species)
+                    break;
+                case "drag-view":
+                    self.setMode(Modes.Drag);
+            */
+
+
+
         });
+
+        $('body').keydown( (e) => {
+
+            console.log("Keydown: " + e.which)
+
+            if (e.which == W_KEY || e.which == UP_KEY) {
+                var cur_top = parseInt($('#env-canvas').css('top'));
+                var new_top = cur_top + KEY_SCROLL_AMOUNT*scaleFactor;
+                $('#env-canvas').css('top', new_top+'px');
+            }
+            else if (e.which == S_KEY || e.which == DOWN_KEY) {
+                var cur_top = parseInt($('#env-canvas').css('top'));
+                var new_top = cur_top - KEY_SCROLL_AMOUNT*scaleFactor;
+                $('#env-canvas').css('top', new_top+'px');
+            }
+            else if (e.which == A_KEY || e.which == LEFT_KEY) {
+                var cur_left = parseInt($('#env-canvas').css('left'));
+                var new_left = cur_left + KEY_SCROLL_AMOUNT*scaleFactor;
+                $('#env-canvas').css('left', new_left+'px');
+            }
+            else if (e.which == D_KEY || e.which == RIGHT_KEY) {
+                var cur_left = parseInt($('#env-canvas').css('left'));
+                var new_left = cur_left - KEY_SCROLL_AMOUNT*scaleFactor;
+                $('#env-canvas').css('left', new_left+'px');
+            } 
+        });
+
         // var self = this;
         // $('#minimize').click ( function() {
         //     $('.control-panel').css('display', 'none');
