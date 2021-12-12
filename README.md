@@ -9,6 +9,7 @@ You can try it out at [Github pages](https://jaalte.github.io/EvolutionSimulator
 You can also start it locally by opening `/docs/index.html`
 To rebuild it just run `npm run build-dev` in the base directory
 
+Also I recommend using it with the dark reader addon/extension to make it easier on the eyes (gets a little jank when running a local copy but works fine on the gh page)
 
 Original readme follows:
 ---
