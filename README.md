@@ -4,7 +4,7 @@ Added features include:
 - Space button pauses the sim
 - Middle-click camera panning with all tools
 
-You can try it out at [Github pages](https://jaalte.github.io/EvolutionSimulatorV2/)
+You can try it out at [Github pages](https://jaalte.github.io/LifeEngine/)
 
 You can also start it locally by opening `/docs/index.html`
 To rebuild it just run `npm run build-dev` in the base directory
