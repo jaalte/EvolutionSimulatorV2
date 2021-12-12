@@ -4,11 +4,11 @@ Added features include:
 - Space button pauses the sim
 - Middle-click camera panning with all tools
 
+You can start it by opening `/dist/index.html`
+To rebuild it just run `npm run build-dev` in the base directory
 
 
-
-
-
+Original readme follows:
 ---
 
 This is the readme for my evolution simulator, The Life Engine. 
