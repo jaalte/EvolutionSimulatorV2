@@ -1,3 +1,16 @@
+This is a fork of The Life Engine by MaxRobinsonTheGreat, with some quality of life features added by jaalte
+
+Added features include:
+- Space button pauses the sim
+- Middle-click camera panning with all tools
+
+
+
+
+
+
+---
+
 This is the readme for my evolution simulator, The Life Engine. 
 
 FOR FEATURE REQUESTS, USE THE DISCUSSIONS TAB. FOR BUG REPORTS, USE THE ISSUES TAB. :)
